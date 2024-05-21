@@ -8,7 +8,7 @@ import kr.hqservice.framework.nms.wrapper.NmsReflectionWrapper
 import kr.hqservice.framework.nms.wrapper.getStaticFunction
 import kr.hqservice.framework.nms.wrapper.item.NmsItemStackWrapper
 import kr.hqservice.framework.nms.wrapper.item.NmsItemWrapper
-import kr.hqservice.framework.nms.wrapper.item.NmsNBTTagCompoundWrapper
+import kr.hqservice.framework.nms.wrapper.item.NmsNBTTagCompoundWrapperImpl
 import org.bukkit.inventory.ItemStack
 import kotlin.reflect.KClass
 
@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
 @Service
 class NmsItemStackService(
     private val reflectionWrapper: NmsReflectionWrapper,
-    @Qualifier("tag") private val tagService: NmsService<Any?, NmsNBTTagCompoundWrapper>,
+    @Qualifier("tag") private val tagService: NmsService<Any?, NmsNBTTagCompoundWrapperImpl>,
     @Qualifier("item") private val itemService: NmsService<NmsItemStackWrapper, NmsItemWrapper>,
 ) : NmsService<ItemStack, NmsItemStackWrapper> {
 

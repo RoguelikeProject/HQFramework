@@ -25,10 +25,9 @@ class WorldService(
 
     override fun wrap(target: World): WorldWrapper {
         val craftWorld = craftWorldClass.cast(target)
-        return WorldWrapper(
-            getHandleFunction.call(craftWorld)
-                ?: throw IllegalStateException("could not wrapping ${target::class.simpleName} class")
-        )
+        val world = getHandleFunction.call(craftWorld)
+            ?: throw IllegalStateException("could not wrapping ${target::class.simpleName} class")
+        return WorldWrapper(world)
     }
 
     override fun unwrap(wrapper: WorldWrapper): World {

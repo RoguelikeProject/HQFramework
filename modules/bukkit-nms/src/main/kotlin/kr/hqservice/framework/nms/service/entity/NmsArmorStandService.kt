@@ -30,7 +30,7 @@ class NmsArmorStandService(
     )
 
     private val setHeadPoseFunction = reflectionWrapper.getFunction(armorStandClass, "setHeadPose", listOf(vector3fService.getTargetClass()),
-        Version.V_18.handleFunction("a") { setParameterClasses(vector3fService.getTargetClass()) },
+        Version.V_17.handleFunction("a") { setParameterClasses(vector3fService.getTargetClass()) },
         Version.V_17_FORGE.handleFunction("m_31597_") { setParameterClasses(vector3fService.getTargetClass()) }
     )
 
@@ -39,30 +39,32 @@ class NmsArmorStandService(
         Version.V_18.handleFunction("u"),
         Version.V_19_4.handleFunction("x"),
         Version.V_20_2.handleFunction("z"),
-        Version.V_20_4.handleFunction("B"),
+        Version.V_20_3.handleFunction("B"),
+        Version.V_20_6.handleFunction("A"),
         Version.V_17_FORGE.handleFunction("m_31680_")
     )
 
     private val setSmallFunction = reflectionWrapper.getFunction(armorStandClass, "setSmall", listOf(Boolean::class),
-        Version.V_18.handleFunction("a") { setParameterClasses(Boolean::class) },
+        Version.V_17.handleFunction("a") { setParameterClasses(Boolean::class) },
         Version.V_19_4.handleFunction("t") { setParameterClasses(Boolean::class) },
         Version.V_17_FORGE.handleFunction("m_31603_") { setParameterClasses(Boolean::class) }
     )
 
     private val setMarkerFunction = reflectionWrapper.getFunction(armorStandClass, "setMarker", listOf(Boolean::class),
-        Version.V_18.handleFunction("t") { setParameterClasses(Boolean::class) },
+        Version.V_17.handleFunction("t") { setParameterClasses(Boolean::class) },
         Version.V_19_4.handleFunction("u") { setParameterClasses(Boolean::class) },
         Version.V_17_FORGE.handleFunction("m_31681_") { setParameterClasses(Boolean::class) }
     )
 
-    private val setShowArmsFunction = reflectionWrapper.getFunction(armorStandClass, "setArms", listOf(Boolean::class),
-        Version.V_18.handleFunction("r") { setParameterClasses(Boolean::class) },
+    private val setShowArmsFunction = reflectionWrapper.getFunction(armorStandClass, "setShowArms", listOf(Boolean::class),
+        Version.V_17.handleFunction("r") { setParameterClasses(Boolean::class) },
         Version.V_19_4.handleFunction("a") { setParameterClasses(Boolean::class) },
         Version.V_17_FORGE.handleFunction("m_31675_") { setParameterClasses(Boolean::class) }
     )
 
-    private val setNoBasePlateFunction = reflectionWrapper.getFunction(armorStandClass, "setBasePlate", listOf(Boolean::class),
-        Version.V_18.handleFunction("s") { setParameterClasses(Boolean::class) },
+    private val setNoBasePlateFunction = reflectionWrapper.getFunction(armorStandClass, "setNoBasePlate", listOf(Boolean::class),
+        Version.V_17.handleFunction("s") { setParameterClasses(Boolean::class) },
+        Version.V_20_6.handleFunction("b") { setParameterClasses(Boolean::class) },
         Version.V_17_FORGE.handleFunction("m_31678_") { setParameterClasses(Boolean::class) }
     )
 
@@ -86,8 +88,8 @@ class NmsArmorStandService(
     }
 
     internal fun getHeadPose(wrapper: NmsArmorStandWrapper): Vector3fWrapper {
-        val headPose =
-            getHeadPoseFunction.call(wrapper.getUnwrappedInstance()) ?: throw NullPointerException("head-pose is null")
+        val headPose = getHeadPoseFunction.call(wrapper.getUnwrappedInstance())
+            ?: throw NullPointerException("head-pose is null")
         return Vector3fWrapper(headPose, vector3fService.getTargetClass(), reflectionWrapper)
     }
 

@@ -74,14 +74,12 @@ class VirtualWorldBorder(
         )
         private val constructor = packetClass.java.getConstructor(service.getTargetClass().java)
 
-        private val centerXField = reflectionWrapper.getField(
-            service.getTargetClass(), "centerX",
+        private val centerXField = reflectionWrapper.getField(service.getTargetClass(), "centerX",
             Version.V_17.handle("h"),
             Version.V_18.handle("i"),
             Version.V_17_FORGE.handle("f_61911_")
         )
-        private val centerZField = reflectionWrapper.getField(
-            service.getTargetClass(), "centerZ",
+        private val centerZField = reflectionWrapper.getField(service.getTargetClass(), "centerZ",
             Version.V_17.handle("i"),
             Version.V_18.handle("j"),
             Version.V_17_FORGE.handle("f_61912_")
@@ -98,13 +96,12 @@ class VirtualWorldBorder(
         private val blocks: Int
     ) {
 
-        private val packetClass = reflectionWrapper.getNmsClass(
-            "ClientboundSetBorderWarningDistancePacket", Version.V_17.handle("network.protocol.game")
+        private val packetClass = reflectionWrapper.getNmsClass("ClientboundSetBorderWarningDistancePacket",
+            Version.V_17.handle("network.protocol.game")
         )
         private val constructor = packetClass.java.getConstructor(service.getTargetClass().java)
 
-        private val warningBlocksField = reflectionWrapper.getField(
-            service.getTargetClass(), "warningBlocks",
+        private val warningBlocksField = reflectionWrapper.getField(service.getTargetClass(), "warningBlocks",
             Version.V_17.handle("g"),
             Version.V_18.handle("h"),
             Version.V_17_FORGE.handle("f_61910_")

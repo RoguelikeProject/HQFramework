@@ -10,9 +10,6 @@ import kr.hqservice.framework.nms.wrapper.getFunction
 import kr.hqservice.framework.nms.wrapper.item.NmsItemStackWrapper
 import kr.hqservice.framework.nms.wrapper.item.NmsItemWrapper
 import kotlin.reflect.KClass
-import kotlin.reflect.full.declaredFunctions
-import kotlin.reflect.full.functions
-import kotlin.reflect.full.memberFunctions
 
 @Qualifier("item")
 @Service
@@ -30,7 +27,8 @@ class NmsItemService(
     private val getItemFunction = reflectionWrapper.getFunction(nmsItemStackClass, "getItem",
         Version.V_18.handle("c"),
         Version.V_20.handle("d"),
-        Version.V_17_FORGE.handle("m_41720_"), // ~1.20.2
+        Version.V_20_6.handle("getItem"),
+        Version.V_17_FORGE.handle("m_41720_")
     )
 
     override fun wrap(target: NmsItemStackWrapper): NmsItemWrapper {

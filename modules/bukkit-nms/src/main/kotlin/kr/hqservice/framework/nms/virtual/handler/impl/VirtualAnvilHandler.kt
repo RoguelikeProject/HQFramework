@@ -61,6 +61,7 @@ class VirtualAnvilHandler(
             "PacketPlayInItemName" -> {
                 val nameField = reflectionWrapper.getField(message::class, "name",
                     Version.V_17.handle("a"),
+                    Version.V_20_6.handle("b"),
                     Version.V_17_FORGE.handle("f_134393_")
                 )
                 val name = nameField.callAccess<String>(message)
@@ -70,6 +71,7 @@ class VirtualAnvilHandler(
             "PacketPlayInWindowClick" -> {
                 val slotNumField = reflectionWrapper.getField(message::class, "slotNum",
                     Version.V_17.handle("d"),
+                    Version.V_20_6.handle("f"),
                     Version.V_17_FORGE.handle("f_133940_")
                 )
                 val slotNum = slotNumField.callAccess<Int>(message)

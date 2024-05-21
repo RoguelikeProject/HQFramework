@@ -35,20 +35,16 @@ class NmsReflectionWrapperImpl(
 
     private val forgeSupport = config.getBoolean("forge-support")
 
-    private val versionClassName: String = server.javaClass.`package`.name.split(".")[3]
-    private val versionName: String = server.bukkitVersion.split("-")[0]
-    private val majorVersion = /*versionClassName.substring(1)*/versionName.split(".")[1].toInt()
-    private val minorVersion = try {
-        versionName.split(".")[2].toInt()
-    } catch (e: Exception) {
-        0
-    }
-    private val version = Version.valueOf("V_$majorVersion")
-    private val fullVersion = try {
-        Version.valueOf("V_${majorVersion}_${minorVersion}")
-    } catch (e: Exception) {
-        version
-    }
+    private val versionName = server.bukkitVersion.split("-")[0]
+    private val majorVersion = versionName.split(".")[1].toInt()
+    private val minorVersion = versionName.split(".").getOrNull(2)?.toIntOrNull() ?: 0
+    private val version = Version.of(majorVersion)!!
+    private val fullVersion = Version.of(majorVersion, minorVersion) ?: version
+
+    private val versionMap = mapOf("1.20.6" to "v1_20_R4")
+    private val versionClassName = runCatching {
+        server.javaClass.`package`.name.split(".")[3]
+    }.getOrNull() ?: versionMap[versionName] ?: versionMap.values.first()
 
     private val craftBukkitClass = "org.bukkit.craftbukkit.$versionClassName."
     private val nmsClass = "net.minecraft.".orLegacy("net.minecraft.server.$versionClassName.")
@@ -63,11 +59,11 @@ class NmsReflectionWrapperImpl(
         Version.V_20.handle("c"),
         Version.V_17_FORGE.handle("f_8906_")
     ) }
-    
+
     private val getHandle by lazy { getFunction(craftPlayer, "getHandle") }
     private val sendPacket by lazy {
-        getFunction(playerConnection, "sendPacket", listOf(packet),
-            Version.V_18.handleFunction("a") { setParameterClasses(packet) },
+        getFunction(playerConnection, "send", listOf(packet),
+            Version.V_17.handleFunction("a") { setParameterClasses(packet) },
             Version.V_20_2.handleFunction("b") { setParameterClasses(packet) },
             Version.V_17_FORGE.handleFunction("m_141995_") { setParameterClasses(packet) },
             Version.V_19_FORGE.handleFunction("m_9829_") { setParameterClasses(packet) },

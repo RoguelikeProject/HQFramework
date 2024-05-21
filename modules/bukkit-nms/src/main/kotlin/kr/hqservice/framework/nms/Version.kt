@@ -21,6 +21,7 @@ enum class Version(
     V_20_2,
     V_20_3,
     V_20_4,
+    V_20_6,
 
     // forge
     V_17_FORGE(V_17),
@@ -49,5 +50,15 @@ enum class Version(
         val type = FunctionType(name)
         block(type)
         return CallableVersionHandler(this, type)
+    }
+
+    companion object {
+        fun of(majorVersion: Int): Version? {
+            return runCatching { valueOf("V_${majorVersion}") }.getOrNull()
+        }
+
+        fun of(majorVersion: Int, minorVersion: Int): Version? {
+            return runCatching { valueOf("V_${majorVersion}_${minorVersion}") }.getOrNull()
+        }
     }
 }

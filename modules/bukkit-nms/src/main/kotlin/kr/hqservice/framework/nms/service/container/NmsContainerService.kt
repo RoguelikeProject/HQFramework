@@ -27,6 +27,7 @@ class NmsContainerService(
         Version.V_19_4.handle("bP"),
         Version.V_20.handle("bR"),
         Version.V_20_2.handle("bS"),
+        Version.V_20_6.handle("containerMenu"), // cb
         Version.V_17_FORGE.handle("f_36096_")
     )
 

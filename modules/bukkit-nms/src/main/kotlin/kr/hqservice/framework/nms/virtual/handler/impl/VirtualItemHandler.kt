@@ -26,6 +26,7 @@ class VirtualItemHandler(
         return if (message::class.simpleName == "PacketPlayOutWindowItems" || message::class.simpleName == "ClientboundContainerSetContentPacket") {
             val containerId = reflectionWrapper.getField(message::class, "containerId",
                 Version.V_17.handle("a"),
+                Version.V_20_6.handle("b"),
                 Version.V_17_FORGE.handle("f_131942_")
             ).callAccess<Int>(message)
             (containerId == targetContainer)
@@ -41,6 +42,7 @@ class VirtualItemHandler(
             "PacketPlayOutOpenWindow", "ClientboundOpenScreenPacket" -> {
                 val containerId = reflectionWrapper.getField(message::class, "containerId",
                     Version.V_17.handle("a"),
+                    Version.V_20_6.handle("b"),
                     Version.V_17_FORGE.handle("f_132611_")
                 ).callAccess<Int>(message)
                 (containerId != targetContainer)
@@ -48,6 +50,7 @@ class VirtualItemHandler(
             "PacketPlayOutCloseWindow", "ClientboundContainerClosePacket" -> {
                 val containerId = reflectionWrapper.getField(message::class, "containerId",
                     Version.V_17.handle("a"),
+                    Version.V_20_6.handle("b"),
                     Version.V_17_FORGE.handle("f_131930_")
                 ).callAccess<Int>(message)
                 (containerId == targetContainer)
@@ -62,6 +65,7 @@ class VirtualItemHandler(
             "PacketPlayOutWindowItems", "ClientboundContainerSetContentPacket" -> {
                 val listField = reflectionWrapper.getField(message::class, "items",
                     Version.V_17.handle("c"),
+                    Version.V_20_6.handle("d"),
                     Version.V_17_FORGE.handle("f_131943_")
                 )
                 val list = listField.callAccess<MutableList<Any>>(message)
