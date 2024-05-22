@@ -57,6 +57,7 @@ class NmsReflectionWrapperImpl(
     private val connection by lazy { getField(entityPlayer, "connection",
         Version.V_17.handle("b"),
         Version.V_20.handle("c"),
+        Version.V_20_6.handle("connection"),
         Version.V_17_FORGE.handle("f_8906_")
     ) }
 
@@ -65,6 +66,7 @@ class NmsReflectionWrapperImpl(
         getFunction(playerConnection, "send", listOf(packet),
             Version.V_17.handleFunction("a") { setParameterClasses(packet) },
             Version.V_20_2.handleFunction("b") { setParameterClasses(packet) },
+            Version.V_20_6.handleFunction("send") { setParameterClasses(packet) },
             Version.V_17_FORGE.handleFunction("m_141995_") { setParameterClasses(packet) },
             Version.V_19_FORGE.handleFunction("m_9829_") { setParameterClasses(packet) },
             Version.V_20_2_FORGE.handleFunction("m_141995_") { setParameterClasses(packet) }
@@ -224,7 +226,9 @@ class NmsReflectionWrapperImpl(
                 } ?: CallableVersionHandler(version, functionType)
 
             try {
-                functions.first { callable -> type.isMatched(clazz, callable) }
+                functions.first { callable ->
+                    type.isMatched(clazz, callable)
+                }
             } catch (e: Exception) {
                 throw NoSuchElementException("${clazz.simpleName}.${type.getName()} 메소드를 찾을 수 업습니다.\n", e)
             }

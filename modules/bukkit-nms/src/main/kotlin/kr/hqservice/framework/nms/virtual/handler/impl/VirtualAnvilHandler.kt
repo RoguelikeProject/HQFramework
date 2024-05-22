@@ -35,7 +35,7 @@ class VirtualAnvilHandler(
     private var unregistered = false
 
     override fun getNmsSimpleNames(): List<String> {
-        return listOf("PacketPlayInItemName", "PacketPlayInWindowClick")
+        return listOf("PacketPlayInItemName", "PacketPlayInWindowClick", "ServerboundRenameItemPacket", "ServerboundContainerClickPacket")
     }
 
     override fun checkCondition(message: Any): Boolean {
@@ -47,7 +47,8 @@ class VirtualAnvilHandler(
     }
 
     override fun unregisterCondition(message: Any): Boolean {
-        if (unregistered || message::class.simpleName == "PacketPlayInCloseWindow") {
+        val simpleName = message::class.simpleName
+        if (unregistered || simpleName == "PacketPlayInCloseWindow" || simpleName == "ServerboundContainerClosePacket") {
             runBlocking { closeScope.invoke(currentText) }
             dummyListener.close()
             return true
@@ -58,20 +59,20 @@ class VirtualAnvilHandler(
     override fun handle(message: Any) {
         val clazz = message::class
         when (clazz.simpleName!!) {
-            "PacketPlayInItemName" -> {
+            "PacketPlayInItemName", "ServerboundRenameItemPacket" -> {
                 val nameField = reflectionWrapper.getField(message::class, "name",
                     Version.V_17.handle("a"),
-                    Version.V_20_6.handle("b"),
+                    Version.V_20_6.handle("name"),
                     Version.V_17_FORGE.handle("f_134393_")
                 )
                 val name = nameField.callAccess<String>(message)
                 runBlocking { textScope(name) }
                 currentText = name
             }
-            "PacketPlayInWindowClick" -> {
+            "PacketPlayInWindowClick", "ServerboundContainerClickPacket" -> {
                 val slotNumField = reflectionWrapper.getField(message::class, "slotNum",
                     Version.V_17.handle("d"),
-                    Version.V_20_6.handle("f"),
+                    Version.V_20_6.handle("slotNum"),
                     Version.V_17_FORGE.handle("f_133940_")
                 )
                 val slotNum = slotNumField.callAccess<Int>(message)

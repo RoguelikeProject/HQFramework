@@ -6,7 +6,7 @@ import kr.hqservice.framework.nms.wrapper.NmsWrapper
 import kr.hqservice.framework.nms.wrapper.getFunction
 import java.util.UUID
 
-class NmsNBTTagCompoundWrapperImpl(
+class NmsNBTTagCompoundWrapper(
     private val nbtTag: Any,
     reflectionWrapper: NmsReflectionWrapper
 ) : NmsWrapper {
@@ -17,138 +17,169 @@ class NmsNBTTagCompoundWrapperImpl(
 
     private val getStringFunction = reflectionWrapper.getFunction(nbtTagClass, "getString", listOf(String::class),
         Version.V_17.handleFunction("l") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getString") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128461_") { setParameterClasses(String::class) }
     )
 
     private val getBooleanFunction = reflectionWrapper.getFunction(nbtTagClass, "getBoolean", listOf(String::class),
         Version.V_17.handleFunction("q") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getBoolean") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128471_") { setParameterClasses(String::class) },
     )
 
     private val getUUIDFunction = reflectionWrapper.getFunction(nbtTagClass, "getUUID", listOf(String::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getUUID") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128342_") { setParameterClasses(String::class) },
     )
 
     private val getByteFunction = reflectionWrapper.getFunction(nbtTagClass, "getByte", listOf(String::class),
         Version.V_17.handleFunction("f") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getByte") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128445_") { setParameterClasses(String::class) },
     )
 
     private val getShortFunction = reflectionWrapper.getFunction(nbtTagClass, "getShort", listOf(String::class),
         Version.V_17.handleFunction("g") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getShort") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128448_") { setParameterClasses(String::class) },
     )
 
     private val getIntFunction = reflectionWrapper.getFunction(nbtTagClass, "getInt", listOf(String::class),
         Version.V_17.handleFunction("h") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getInt") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128451_") { setParameterClasses(String::class) }
     )
 
     private val getLongFunction = reflectionWrapper.getFunction(nbtTagClass, "getLong", listOf(String::class),
         Version.V_17.handleFunction("i") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getLong") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128454_") { setParameterClasses(String::class) },
     )
 
     private val getFloatFunction = reflectionWrapper.getFunction(nbtTagClass, "getFloat", listOf(String::class),
         Version.V_17.handleFunction("j") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getFloat") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128457_") { setParameterClasses(String::class) },
     )
 
     private val getDoubleFunction = reflectionWrapper.getFunction(nbtTagClass, "getDouble", listOf(String::class),
         Version.V_17.handleFunction("k") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getDouble") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128459_") { setParameterClasses(String::class) },
     )
 
     private val getByteArrayFunction = reflectionWrapper.getFunction(nbtTagClass, "getByteArray", listOf(String::class),
         Version.V_17.handleFunction("m") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getByteArray") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128463_") { setParameterClasses(String::class) },
     )
 
     private val getIntArrayFunction = reflectionWrapper.getFunction(nbtTagClass, "getIntArray", listOf(String::class),
         Version.V_17.handleFunction("n") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getIntArray") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128465_") { setParameterClasses(String::class) },
     )
 
     private val getLongArrayFunction = reflectionWrapper.getFunction(nbtTagClass, "getLongArray", listOf(String::class),
         Version.V_17.handleFunction("o") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("getLongArray") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128467_") { setParameterClasses(String::class) },
     )
 
     private val setStringFunction = reflectionWrapper.getFunction(nbtTagClass, "putString", listOf(String::class, String::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, String::class) },
+        Version.V_20_6.handleFunction("putString") { setParameterClasses(String::class, String::class) },
         Version.V_17_FORGE.handleFunction("m_128359_") { setParameterClasses(String::class, String::class) }
     )
 
     private val setBooleanFunction = reflectionWrapper.getFunction(nbtTagClass, "putBoolean", listOf(String::class, Boolean::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Boolean::class) },
+        Version.V_20_6.handleFunction("putBoolean") { setParameterClasses(String::class, Boolean::class) },
         Version.V_17_FORGE.handleFunction("m_128379_") { setParameterClasses(String::class, Boolean::class) }
     )
 
     private val setUUIDFunction = reflectionWrapper.getFunction(nbtTagClass, "putUUID", listOf(String::class, UUID::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, UUID::class) },
+        Version.V_20_6.handleFunction("putUUID") { setParameterClasses(String::class, UUID::class) },
         Version.V_17_FORGE.handleFunction("m_128362_") { setParameterClasses(String::class, UUID::class) }
     )
 
     private val setByteFunction = reflectionWrapper.getFunction(nbtTagClass, "putByte", listOf(String::class, Byte::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Byte::class) },
+        Version.V_20_6.handleFunction("putByte") { setParameterClasses(String::class, Byte::class) },
         Version.V_17_FORGE.handleFunction("m_128344_") { setParameterClasses(String::class, Byte::class) }
     )
 
     private val setShortFunction = reflectionWrapper.getFunction(nbtTagClass, "putShort", listOf(String::class, Short::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Short::class) },
+        Version.V_20_6.handleFunction("putShort") { setParameterClasses(String::class, Short::class) },
         Version.V_17_FORGE.handleFunction("m_128376_") { setParameterClasses(String::class, Short::class) }
     )
 
     private val setIntFunction = reflectionWrapper.getFunction(nbtTagClass, "putInt", listOf(String::class, Int::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Int::class) },
+        Version.V_20_6.handleFunction("putInt") { setParameterClasses(String::class, Int::class) },
         Version.V_17_FORGE.handleFunction("m_128405_") { setParameterClasses(String::class, Int::class) }
     )
 
     private val setLongFunction = reflectionWrapper.getFunction(nbtTagClass, "putLong", listOf(String::class, Long::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Long::class) },
+        Version.V_20_6.handleFunction("putLong") { setParameterClasses(String::class, Long::class) },
         Version.V_17_FORGE.handleFunction("m_128356_") { setParameterClasses(String::class, Long::class) }
     )
 
     private val setFloatFunction = reflectionWrapper.getFunction(nbtTagClass, "putFloat", listOf(String::class, Float::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Float::class) },
+        Version.V_20_6.handleFunction("putFloat") { setParameterClasses(String::class, Float::class) },
         Version.V_17_FORGE.handleFunction("m_128350_") { setParameterClasses(String::class, Float::class) }
     )
 
     private val setDoubleFunction = reflectionWrapper.getFunction(nbtTagClass, "putDouble", listOf(String::class, Double::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, Double::class) },
+        Version.V_20_6.handleFunction("putDouble") { setParameterClasses(String::class, Double::class) },
         Version.V_17_FORGE.handleFunction("m_128347_") { setParameterClasses(String::class, Double::class) }
     )
 
     private val setByteArrayFunction = reflectionWrapper.getFunction(nbtTagClass, "putByteArray", listOf(String::class, ByteArray::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, ByteArray::class) },
+        Version.V_20_6.handleFunction("putByteArray") { setParameterClasses(String::class, ByteArray::class) },
         Version.V_17_FORGE.handleFunction("m_128382_") { setParameterClasses(String::class, ByteArray::class) }
     )
 
     private val setIntArrayFunction = reflectionWrapper.getFunction(nbtTagClass, "putIntArray", listOf(String::class, IntArray::class),
-        Version.V_18.handleFunction("a") { setParameterClasses(String::class, IntArray::class) },
+        Version.V_17.handleFunction("a") { setParameterClasses(String::class, IntArray::class) },
+        Version.V_20_6.handleFunction("putIntArray") { setParameterClasses(String::class, IntArray::class) },
         Version.V_17_FORGE.handleFunction("m_128385_") { setParameterClasses(String::class, IntArray::class) }
     )
 
     private val setLongArrayFunction = reflectionWrapper.getFunction(nbtTagClass, "putLongArray", listOf(String::class, LongArray::class),
         Version.V_17.handleFunction("a") { setParameterClasses(String::class, LongArray::class) },
+        Version.V_20_6.handleFunction("putLongArray") { setParameterClasses(String::class, LongArray::class) },
         Version.V_17_FORGE.handleFunction("m_128388_") { setParameterClasses(String::class, LongArray::class) }
     )
 
     private val removeFunction = reflectionWrapper.getFunction(nbtTagClass, "remove", listOf(String::class),
         Version.V_17.handleFunction("r") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("remove") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128473_") { setParameterClasses(String::class) }
     )
 
     private val containsFunction = reflectionWrapper.getFunction(nbtTagClass, "contains", listOf(String::class),
         Version.V_17.handleFunction("e") { setParameterClasses(String::class) },
+        Version.V_20_6.handleFunction("contains") { setParameterClasses(String::class) },
         Version.V_17_FORGE.handleFunction("m_128441_") { setParameterClasses(String::class) }
     )
 
     private val isEmptyFunction = reflectionWrapper.getFunction(nbtTagClass, "isEmpty",
         Version.V_18.handleFunction("f"),
         Version.V_19_3.handleFunction("g"),
+        Version.V_20_6.handleFunction("isEmpty"),
         Version.V_17_FORGE.handleFunction("m_128456_")
+    )
+
+    private val mergeFunction = reflectionWrapper.getFunction(nbtTagClass, "merge", listOf(nbtTagClass),
+        Version.V_20_6.handleFunction("merge") { setParameterClasses(nbtTagClass) }
     )
 
     fun getString(key: String, def: String = ""): String {
@@ -305,6 +336,10 @@ class NmsNBTTagCompoundWrapperImpl(
 
     fun isEmpty(): Boolean {
         return isEmptyFunction.call(nbtTag) as? Boolean ?: true
+    }
+
+    fun merge(nbtTagCompoundWrapper: NmsNBTTagCompoundWrapper?) {
+        mergeFunction.call(nbtTag, nbtTagCompoundWrapper?.nbtTag)
     }
 
     override fun getUnwrappedInstance(): Any {

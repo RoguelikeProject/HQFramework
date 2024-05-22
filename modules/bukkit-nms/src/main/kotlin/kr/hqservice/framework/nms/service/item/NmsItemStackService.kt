@@ -6,9 +6,7 @@ import kr.hqservice.framework.nms.Version
 import kr.hqservice.framework.nms.service.NmsService
 import kr.hqservice.framework.nms.wrapper.NmsReflectionWrapper
 import kr.hqservice.framework.nms.wrapper.getStaticFunction
-import kr.hqservice.framework.nms.wrapper.item.NmsItemStackWrapper
-import kr.hqservice.framework.nms.wrapper.item.NmsItemWrapper
-import kr.hqservice.framework.nms.wrapper.item.NmsNBTTagCompoundWrapperImpl
+import kr.hqservice.framework.nms.wrapper.item.*
 import org.bukkit.inventory.ItemStack
 import kotlin.reflect.KClass
 
@@ -16,7 +14,9 @@ import kotlin.reflect.KClass
 @Service
 class NmsItemStackService(
     private val reflectionWrapper: NmsReflectionWrapper,
-    @Qualifier("tag") private val tagService: NmsService<Any?, NmsNBTTagCompoundWrapperImpl>,
+    @Qualifier("tag") private val tagService: NmsService<Any?, NmsNBTTagCompoundWrapper>,
+    @Qualifier("data-component-map") private val dataComponentMapService: NmsService<Any?, NmsDataComponentMapWrapper>,
+    @Qualifier("custom-data") private val customDataService: NmsService<Any?, NmsCustomDataWrapper>,
     @Qualifier("item") private val itemService: NmsService<NmsItemStackWrapper, NmsItemWrapper>,
 ) : NmsService<ItemStack, NmsItemStackWrapper> {
 
@@ -42,7 +42,11 @@ class NmsItemStackService(
         return NmsItemStackWrapper(
             asNmsCopyFunction.call(target) ?: throw IllegalArgumentException(),
             reflectionWrapper,
-            tagService, itemService, this
+            tagService,
+            dataComponentMapService,
+            customDataService,
+            itemService,
+            this
         )
     }
 
@@ -52,7 +56,7 @@ class NmsItemStackService(
     }
 
     override fun getWrapper(nmsInstance: Any): NmsItemStackWrapper {
-        return NmsItemStackWrapper(nmsInstance, reflectionWrapper, tagService, itemService, this)
+        return NmsItemStackWrapper(nmsInstance, reflectionWrapper, tagService, dataComponentMapService, customDataService, itemService, this)
     }
 
     override fun getOriginalClass(): KClass<*> {
